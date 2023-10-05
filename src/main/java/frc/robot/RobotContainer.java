@@ -6,6 +6,8 @@ package frc.robot;
 
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
@@ -18,6 +20,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem _driveSubsystem = new DriveSubsystem();
+  private final ShooterSubsystem _shooterSubsystem = new ShooterSubsystem();
+  private final IntakeSubsystem _intakeSubsystem = new IntakeSubsystem();
+
   private final RobotCtrl _robotCtrl = new RobotCtrl();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -32,8 +37,9 @@ public class RobotContainer {
     ));
   }
 
-  // Will probably be moved to RobotCtrl
-  private void configureBindings() {}
+  private void configureBindings() {
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

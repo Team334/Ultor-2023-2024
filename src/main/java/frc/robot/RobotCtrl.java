@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 
+/** Contains controllers for robot and additional functions. */
 public class RobotCtrl {
     public final CommandPS4Controller driveController = new CommandPS4Controller(RobotMap.DRIVER_CONTROLLER);
 
