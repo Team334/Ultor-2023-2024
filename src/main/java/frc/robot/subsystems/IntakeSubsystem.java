@@ -4,14 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import frc.robot.utils.TalonFXConfig;
+
 
 public class IntakeSubsystem extends SubsystemBase {
   // drive: spin on actuator to bring ball in
@@ -32,13 +27,20 @@ public class IntakeSubsystem extends SubsystemBase {
 
   }
 
+  /**
+   * Set the speed of the actuator motor.
+   * 
+   * @param speed The speed of the actuator motor.
+   */
   public void setActuator(double speed) {
-    // _actuator.set(TalonFXControlMode.PercentOutput, speed);
   }
 
-  // public double getActuator() {
-  //   // return _actuator.getSelectedSensorPosition();
-  // }
+  /**
+   * Get the encoder value of the actuator motor.
+   */
+  public double getActuator() {
+    return 0.0;  
+  }
 
   /**
    * Set ball feed for shooter.

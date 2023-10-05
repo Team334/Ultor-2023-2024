@@ -7,16 +7,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class ShooterSubsystem extends SubsystemBase {
-  TalonFX _left, _right;
+  private TalonFX _left, _right;
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    // _left = new TalonFX(RobotMap.SHOOTER_LEFT);
-    // _right = new TalonFX(RobotMap.SHOOTER_RIGHT);
   }
 
   @Override
