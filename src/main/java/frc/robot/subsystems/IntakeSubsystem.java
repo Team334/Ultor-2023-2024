@@ -4,9 +4,14 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
+import frc.robot.utils.TalonFXConfig;
 
 public class IntakeSubsystem extends SubsystemBase {
   // drive: spin on actuator to bring ball in
@@ -14,16 +19,26 @@ public class IntakeSubsystem extends SubsystemBase {
   private TalonFX _drive, _actuator;
 
   /** Creates a new IntakeSubsystem. */
-  public IntakeSubsystem() {}
+  public IntakeSubsystem() {
+    
+  }
 
   /**
-   * Set intake for ball.
+   * Set intake speed for ball.
    * 
    * @param speed The speed to set the intake.
    */
   public void setIntake(double speed) {
 
   }
+
+  public void setActuator(double speed) {
+    // _actuator.set(TalonFXControlMode.PercentOutput, speed);
+  }
+
+  // public double getActuator() {
+  //   // return _actuator.getSelectedSensorPosition();
+  // }
 
   /**
    * Set ball feed for shooter.
@@ -37,5 +52,6 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(getActuator());
   }
 }

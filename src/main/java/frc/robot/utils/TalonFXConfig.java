@@ -11,6 +11,12 @@ import frc.robot.Constants;
  * For configuring Falcons.
  */
 public class TalonFXConfig {
+    public static void configureFalcon(TalonFX falcon) {
+        falcon.configFactoryDefault(Constants.CAN.CAN_TIMEOUT);
+        falcon.configNeutralDeadband(0.01, Constants.CAN.CAN_TIMEOUT);
+        falcon.setNeutralMode(NeutralMode.Brake);
+    }
+
     /**
      * Configure a master Falcon motor.
      * 

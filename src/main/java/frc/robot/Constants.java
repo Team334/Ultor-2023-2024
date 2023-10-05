@@ -22,6 +22,11 @@ public final class Constants {
   }
 
   public static class Speed {
-    public static final double DRIVE_COEFF = 0.5;
+    public static final double DRIVE_COEFF = 0.2;
+  }
+
+  public static class Encoder {
+    public static final double INTAKE_RETRACTED = -100;
+    public static final double INTAKE_EXTENDED = -2560;
   }
 }
