@@ -15,11 +15,16 @@ public class DriveCommand extends CommandBase {
   private DoubleSupplier _getLeft;
   private DoubleSupplier _getRight;
 
-  /** Creates a new DriveCommand. This command is used for teleop driving. */
-  public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier getLeft, DoubleSupplier getRight) {
+  private boolean _arcade;
+
+  /** Creates a new DriveCommand. This command is used for either tank or arcade teleop driving. */
+  public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier getLeft, DoubleSupplier getRight, boolean arcade) {
     _driveSubsystem = driveSubsystem;
+
     _getLeft = getLeft;
     _getRight = getRight;
+
+    _arcade = arcade;
 
     addRequirements(driveSubsystem);
   }
@@ -31,10 +36,19 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _driveSubsystem.tank(
-      _getLeft.getAsDouble(),
-      _getRight.getAsDouble()
-    );
+    if (_arcade) {
+      _driveSubsystem.arcade(
+        _getLeft.getAsDouble(),
+        _getRight.getAsDouble()
+      );
+    }
+    
+    else {
+      _driveSubsystem.tank(
+        _getLeft.getAsDouble(),
+        _getRight.getAsDouble()
+      );
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -33,7 +33,8 @@ public class RobotContainer {
     _driveSubsystem.setDefaultCommand(new DriveCommand(
       _driveSubsystem,
       _robotCtrl :: driveLeftY,
-      _robotCtrl :: driveRightY
+      _robotCtrl :: driveRightX,
+      true
     ));
   }
 
