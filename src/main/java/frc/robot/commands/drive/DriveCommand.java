@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveCommand extends CommandBase {
-  private DriveSubsystem _driveSubsystem;
+  private final DriveSubsystem _driveSubsystem;
 
-  private DoubleSupplier _getLeft;
-  private DoubleSupplier _getRight;
+  private final DoubleSupplier _getLeft;
+  private final DoubleSupplier _getRight;
 
-  private boolean _arcade;
+  private final boolean _arcade;
 
   /** Creates a new DriveCommand. This command is used for either tank or arcade teleop driving. */
   public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier getLeft, DoubleSupplier getRight, boolean arcade) {
