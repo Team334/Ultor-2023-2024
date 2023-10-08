@@ -23,7 +23,7 @@ public final class Constants {
 
   public static class Speed {
     public static final double TANK_DRIVE_COEFF = 0.1;
-    public static final double ARCADE_DRIVE_COEFF = 0.43;
+    public static final double ARCADE_DRIVE_COEFF = 0.57;
   }
 
   public static class Encoder {

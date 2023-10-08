@@ -4,56 +4,62 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
+import frc.robot.utils.TalonFXConfig;
 
 
 public class IntakeSubsystem extends SubsystemBase {
   // drive: spin on actuator to bring ball in
   // actuator: extends from robot
-  private TalonFX _drive, _actuator;
+  private WPI_TalonFX _drive, _actuator;
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
-    
+    _actuator = new WPI_TalonFX(RobotMap.INTAKE_ACTUATOR);
+
+    TalonFXConfig.configureFalcon(_actuator);
   }
 
   /**
-   * Set intake speed for ball.
+   * Set drive intake speed for ball.
    * 
-   * @param speed The speed to set the intake.
+   * @param speed - The speed to set the drive intake.
    */
-  public void setIntake(double speed) {
+  public void setDriveIntake(double speed) {
 
-  }
-
-  /**
-   * Set the speed of the actuator motor.
-   * 
-   * @param speed The speed of the actuator motor.
-   */
-  public void setActuator(double speed) {
-  }
-
-  /**
-   * Get the encoder value of the actuator motor.
-   */
-  public double getActuator() {
-    return 0.0;  
   }
 
   /**
    * Set ball feed for shooter.
    * 
-   * @param speed The speed to set the feed.
+   * @param speed - The speed to set the feed.
    */
   public void setFeed(double speed) {
 
   }
 
+  /**
+   * Set the voltage of the actuator Falcon.
+   * 
+   * @param voltage - The voltage of the actuator Falcon.
+   */
+  public void setActuatorVoltage(double voltage) {
+    _actuator.setVoltage(voltage);
+  }
+
+  /**
+   * Get the encoder value of the actuator Falcon.
+   */
+  public double getActuator() {
+    return _actuator.getSelectedSensorPosition();
+  }
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(getActuator());
   }
 }

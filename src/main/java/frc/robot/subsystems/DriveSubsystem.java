@@ -16,7 +16,6 @@ import frc.robot.utils.TalonFXConfig;
 
 public class DriveSubsystem extends SubsystemBase {
   // left and right 1s are WPI_TalonFX to work with WPI DifferentialDrive class
-
   private final WPI_TalonFX _left1;
   private final TalonFX _left2;
   private final TalonFX _left3;
