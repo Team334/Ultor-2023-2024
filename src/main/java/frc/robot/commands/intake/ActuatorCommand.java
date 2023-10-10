@@ -7,18 +7,22 @@ package frc.robot.commands.intake;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class ActuatorCommand extends CommandBase {
   private final IntakeSubsystem _intakeSubsystem;
   private final PIDController _pid;
 
-  /** Creates a new ActuatorCommand. */
-  public ActuatorCommand(IntakeSubsystem intakeSubsystem) {
-    _intakeSubsystem = intakeSubsystem;
-    _pid = new PIDController(0, 0, 0); // TODO: VALUES?
+  private final boolean _retract;
 
-    _pid.setTolerance(0); // TODO: VALUE?
+  /** Creates a new ActuatorCommand. */
+  public ActuatorCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
+    _intakeSubsystem = intakeSubsystem;
+    _pid = new PIDController(0.1, 0, 0); // TODO: VALUES?
+    _retract = retract;
+
+    _pid.setTolerance(50); // TODO: VALUE?
 
     addRequirements(intakeSubsystem);
   }
@@ -30,8 +34,18 @@ public class ActuatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double volts = _pid.calculate(0); // TODO: VALUE?
-    volts = MathUtil.clamp(volts, 0, 0); // TODO: VALUES?
+    double setpoint;
+
+    if (_retract) {
+      setpoint = Constants.Encoder.INTAKE_RETRACTED;
+    } else {
+      setpoint = Constants.Encoder.INTAKE_EXTENDED;
+    }
+
+    double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
+    volts = MathUtil.clamp(volts, -0.5, 0.5);
+
+    System.out.println(_intakeSubsystem.getActuator());
 
     _intakeSubsystem.setActuatorVoltage(volts);
   }

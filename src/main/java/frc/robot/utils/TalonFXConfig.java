@@ -14,7 +14,7 @@ import frc.robot.Constants;
  */
 public class TalonFXConfig {
     /**
-     * Basic Falcon config, sets Falcon to factory defaults, sets encoder to zero, 
+     * Basic Falcon config, sets Falcon to factory defaults, sets encoder to 0, 
      * and sets Falcon deadband and sets Falcon to Brake neutral mode.
      * 
      * @param falcon - The Falcon to config.
@@ -26,7 +26,7 @@ public class TalonFXConfig {
 
         // TODO: test that this works
         falcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        falcon.configIntegratedSensorInitializationStrategy(SensorInitializationStrategy.BootToZero);
+        falcon.setSelectedSensorPosition(0);
     }
 
     /**

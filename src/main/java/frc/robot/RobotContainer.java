@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.commands.drive.DriveCommand;
+import frc.robot.commands.intake.ActuatorCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -39,6 +40,11 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
+    _robotCtrl.driveController.cross().onTrue(
+      new ActuatorCommand(_intakeSubsystem, false)
+    ).onFalse(
+      new ActuatorCommand(_intakeSubsystem, true)
+    );
   }
 
   /**

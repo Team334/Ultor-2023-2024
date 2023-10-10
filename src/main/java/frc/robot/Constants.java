@@ -13,21 +13,17 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
-
   public static class CAN {
     public static final int CAN_TIMEOUT = 10;
   }
 
   public static class Speed {
     public static final double TANK_DRIVE_COEFF = 0.1;
-    public static final double ARCADE_DRIVE_COEFF = 0.57;
+    public static final double ARCADE_DRIVE_COEFF = 0.3;
   }
 
   public static class Encoder {
-    public static final double INTAKE_RETRACTED = -100;
-    public static final double INTAKE_EXTENDED = -2560;
+    public static final double INTAKE_RETRACTED = -10;
+    public static final double INTAKE_EXTENDED = -2600;
   }
 }
