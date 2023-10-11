@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class ActuatorCommand extends CommandBase {
+public class IntakeCommand extends CommandBase {
   private final IntakeSubsystem _intakeSubsystem;
   private final PIDController _pid;
 
   private final boolean _retract;
 
-  /** Creates a new ActuatorCommand. */
-  public ActuatorCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
+  /** Creates a new IntakeCommand. */
+  public IntakeCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
     _intakeSubsystem = intakeSubsystem;
     _pid = new PIDController(0.1, 0, 0); // TODO: VALUES?
     _retract = retract;
@@ -38,8 +38,10 @@ public class ActuatorCommand extends CommandBase {
 
     if (_retract) {
       setpoint = Constants.Encoder.INTAKE_RETRACTED;
+      _intakeSubsystem.setDriveIntake(0);
     } else {
       setpoint = Constants.Encoder.INTAKE_EXTENDED;
+      _intakeSubsystem.setDriveIntake(0.1);
     }
 
     double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);

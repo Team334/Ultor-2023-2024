@@ -16,8 +16,7 @@ public class RobotMap {
     public static final int SHOOTER_HOOD = 7;
     
     public static final int INTAKE_ACTUATOR  = 11;
-    public static final int INTAKE_MAG  = 12;
-
+    public static final int INTAKE_DRIVE = 12;
     
     public static final int INTAKE_FEED = 10;
 }

@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenixpro.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -19,6 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     _actuator = new WPI_TalonFX(RobotMap.INTAKE_ACTUATOR);
+    _drive = new WPI_TalonFX(RobotMap.INTAKE_DRIVE);
 
     TalonFXConfig.configureFalcon(_actuator);
   }
@@ -29,7 +32,7 @@ public class IntakeSubsystem extends SubsystemBase {
    * @param speed - The speed to set the drive intake.
    */
   public void setDriveIntake(double speed) {
-
+    _drive.set(TalonFXControlMode.PercentOutput, speed);
   }
 
   /**
@@ -38,7 +41,7 @@ public class IntakeSubsystem extends SubsystemBase {
    * @param speed - The speed to set the feed.
    */
   public void setFeed(double speed) {
-
+    
   }
 
   /**
