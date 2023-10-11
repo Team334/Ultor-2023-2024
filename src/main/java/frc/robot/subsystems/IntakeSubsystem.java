@@ -6,7 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenixpro.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -16,12 +17,15 @@ import frc.robot.utils.TalonFXConfig;
 public class IntakeSubsystem extends SubsystemBase {
   // drive: spin on actuator to bring ball in
   // actuator: extends from robot
-  private WPI_TalonFX _drive, _actuator;
+  private final WPI_TalonFX _drive, _actuator;
+  private final CANSparkMax _feed;
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     _actuator = new WPI_TalonFX(RobotMap.INTAKE_ACTUATOR);
     _drive = new WPI_TalonFX(RobotMap.INTAKE_DRIVE);
+
+    _feed = new CANSparkMax(RobotMap.INTAKE_FEED, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     TalonFXConfig.configureFalcon(_actuator);
   }
@@ -41,7 +45,7 @@ public class IntakeSubsystem extends SubsystemBase {
    * @param speed - The speed to set the feed.
    */
   public void setFeed(double speed) {
-    
+    _feed.set(speed);
   }
 
   /**
@@ -64,6 +68,6 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    System.out.println(getActuator());
+    // System.out.println(getActuator());
   }
 }

@@ -34,22 +34,28 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double setpoint;
-
     if (_retract) {
-      setpoint = Constants.Encoder.INTAKE_RETRACTED;
-      _intakeSubsystem.setDriveIntake(0);
+      _intakeSubsystem.setFeed(0);
     } else {
-      setpoint = Constants.Encoder.INTAKE_EXTENDED;
-      _intakeSubsystem.setDriveIntake(0.1);
+      _intakeSubsystem.setFeed(0.1);
     }
 
-    double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
-    volts = MathUtil.clamp(volts, -0.5, 0.5);
+    // double setpoint;
 
-    System.out.println(_intakeSubsystem.getActuator());
+    // if (_retract) {
+    //   setpoint = Constants.Encoder.INTAKE_RETRACTED;
+    //   _intakeSubsystem.setDriveIntake(0);
+    // } else {
+    //   setpoint = Constants.Encoder.INTAKE_EXTENDED;
+    //   _intakeSubsystem.setDriveIntake(0.1);
+    // }
 
-    _intakeSubsystem.setActuatorVoltage(volts);
+    // double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
+    // volts = MathUtil.clamp(volts, -0.5, 0.5);
+
+    // System.out.println(_intakeSubsystem.getActuator());
+
+    // _intakeSubsystem.setActuatorVoltage(volts);
   }
 
   // Called once the command ends or is interrupted.
@@ -62,5 +68,6 @@ public class IntakeCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     return _pid.atSetpoint();
+    // return false;
   }
 }
