@@ -5,12 +5,13 @@
 package frc.robot;
 
 import frc.robot.commands.drive.DriveCommand;
+import frc.robot.commands.intake.FeedCommand;
 import frc.robot.commands.intake.IntakeCommand;
-import frc.robot.commands.shooter.ShootCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 
 
 /**
@@ -42,13 +43,9 @@ public class RobotContainer {
 
   private void configureBindings() {
     _robotCtrl.driveController.cross().onTrue(
-      new IntakeCommand(_intakeSubsystem, false)
+      Commands.sequence(new IntakeCommand(_intakeSubsystem, false), new FeedCommand(_intakeSubsystem, true))
     ).onFalse(
       new IntakeCommand(_intakeSubsystem, true)
-    );
-
-    _robotCtrl.driveController.circle().whileTrue(
-      new ShootCommand(_shooterSubsystem)
     );
   }
 

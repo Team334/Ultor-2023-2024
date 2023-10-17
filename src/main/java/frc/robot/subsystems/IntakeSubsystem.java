@@ -19,7 +19,7 @@ public class IntakeSubsystem extends SubsystemBase {
   // drive: spin on actuator to bring ball in
   // actuator: extends from robot
   private final WPI_TalonFX _drive, _actuator;
-  private final CANSparkMax _feed;
+  private final CANSparkMax _feed, _mag;
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
@@ -27,6 +27,7 @@ public class IntakeSubsystem extends SubsystemBase {
     _drive = new WPI_TalonFX(RobotMap.INTAKE_DRIVE);
 
     _feed = new CANSparkMax(RobotMap.INTAKE_FEED, CANSparkMaxLowLevel.MotorType.kBrushless);
+    _mag = new CANSparkMax(RobotMap.INTAKE_MAG, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     TalonFXConfig.configureFalcon(_actuator);
   }
@@ -47,6 +48,15 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void setFeed(double speed) {
     _feed.set(speed);
+  }
+
+  /**
+   * Set mag speed for shooter.
+   * 
+   * @param speed - The speed to set the mag.
+   */
+  public void setMag(double speed) {
+    _mag.set(speed);
   }
 
   /**

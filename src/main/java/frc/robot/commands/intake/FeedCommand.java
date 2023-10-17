@@ -4,25 +4,18 @@
 
 package frc.robot.commands.intake;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeCommand extends CommandBase {
+public class FeedCommand extends CommandBase {
   private final IntakeSubsystem _intakeSubsystem;
-  private final PIDController _pid;
+  private final boolean _feedIn;
 
-  private final boolean _retract;
-
-  /** Creates a new IntakeCommand. */
-  public IntakeCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
+  /** Creates a new FeedCommand. */
+  public FeedCommand(IntakeSubsystem intakeSubsystem, boolean feedIn) {
+    // Use addRequirements() here to declare subsystem dependencies.
     _intakeSubsystem = intakeSubsystem;
-    _pid = new PIDController(0.1, 0, 0); // TODO: VALUES?
-    _retract = retract;
-
-    _pid.setTolerance(50); // TODO: VALUE?
+    _feedIn = feedIn;
 
     addRequirements(intakeSubsystem);
   }
@@ -34,29 +27,28 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double setpoint;
-
-    if (_retract) {
-      setpoint = Constants.Encoder.INTAKE_RETRACTED;
+    if (_feedIn) {
+      _intakeSubsystem.setMag(-0.1);
+      _intakeSubsystem.setFeed(-0.16);
+      _intakeSubsystem.setDriveIntake(0.2);
     } else {
-      setpoint = Constants.Encoder.INTAKE_EXTENDED;
+      _intakeSubsystem.setMag(0.1);
+      _intakeSubsystem.setFeed(0.16);
+      _intakeSubsystem.setDriveIntake(-0.2);
     }
-
-    double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
-    volts = MathUtil.clamp(volts, -0.5, 0.5);
-
-    _intakeSubsystem.setActuatorVoltage(volts);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    _intakeSubsystem.setActuatorVoltage(0);
+    _intakeSubsystem.setMag(0);
+    _intakeSubsystem.setFeed(0);
+    _intakeSubsystem.setDriveIntake(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return _pid.atSetpoint();
+    return false;
   }
 }
