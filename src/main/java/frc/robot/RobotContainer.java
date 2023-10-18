@@ -11,7 +11,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 
 
 /**
@@ -23,8 +22,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem _driveSubsystem = new DriveSubsystem();
-  private final ShooterSubsystem _shooterSubsystem = new ShooterSubsystem();
   private final IntakeSubsystem _intakeSubsystem = new IntakeSubsystem();
+  private final ShooterSubsystem _shooterSubsystem = new ShooterSubsystem();
 
   private final RobotCtrl _robotCtrl = new RobotCtrl();
 
@@ -43,9 +42,17 @@ public class RobotContainer {
 
   private void configureBindings() {
     _robotCtrl.driveController.cross().onTrue(
-      Commands.sequence(new IntakeCommand(_intakeSubsystem, false), new FeedCommand(_intakeSubsystem, true))
+      new IntakeCommand(_intakeSubsystem, false)
     ).onFalse(
       new IntakeCommand(_intakeSubsystem, true)
+    );
+
+    _robotCtrl.driveController.L1().whileTrue(
+      new FeedCommand(_intakeSubsystem, false)
+    );
+
+    _robotCtrl.driveController.L2().whileTrue(
+      new FeedCommand(_intakeSubsystem, true)
     );
   }
 

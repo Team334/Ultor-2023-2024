@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 
 import frc.robot.Constants;
 
@@ -24,7 +23,6 @@ public class TalonFXConfig {
         falcon.configNeutralDeadband(0.01, Constants.CAN.CAN_TIMEOUT);
         falcon.setNeutralMode(NeutralMode.Brake);
 
-        // TODO: test that this works
         falcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         falcon.setSelectedSensorPosition(0);
     }

@@ -16,7 +16,7 @@ public class IntakeCommand extends CommandBase {
 
   private final boolean _retract;
 
-  /** Creates a new IntakeCommand. */
+  /** Creates a new IntakeCommand. FOR INTAKE + FEEDING */
   public IntakeCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
     _intakeSubsystem = intakeSubsystem;
     _pid = new PIDController(0.1, 0, 0); // TODO: VALUES?
@@ -38,8 +38,17 @@ public class IntakeCommand extends CommandBase {
 
     if (_retract) {
       setpoint = Constants.Encoder.INTAKE_RETRACTED;
+
+      // when retracting set all feeding motors to 0
+      _intakeSubsystem.setMag(0);
+      _intakeSubsystem.setFeed(0);
+      _intakeSubsystem.setDriveIntake(0);
     } else {
       setpoint = Constants.Encoder.INTAKE_EXTENDED;
+
+      _intakeSubsystem.setMag(-0.1);
+      _intakeSubsystem.setFeed(-0.16);
+      _intakeSubsystem.setDriveIntake(0.2);
     }
 
     double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
@@ -52,6 +61,10 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     _intakeSubsystem.setActuatorVoltage(0);
+
+    _intakeSubsystem.setMag(0);
+    _intakeSubsystem.setFeed(0);
+    _intakeSubsystem.setDriveIntake(0);
   }
 
   // Returns true when the command should end.

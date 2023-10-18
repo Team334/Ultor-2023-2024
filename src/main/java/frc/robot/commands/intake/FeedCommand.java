@@ -11,7 +11,7 @@ public class FeedCommand extends CommandBase {
   private final IntakeSubsystem _intakeSubsystem;
   private final boolean _feedIn;
 
-  /** Creates a new FeedCommand. */
+  /** Creates a new FeedCommand. FOR FEEDING ONLY. */
   public FeedCommand(IntakeSubsystem intakeSubsystem, boolean feedIn) {
     // Use addRequirements() here to declare subsystem dependencies.
     _intakeSubsystem = intakeSubsystem;
@@ -30,11 +30,9 @@ public class FeedCommand extends CommandBase {
     if (_feedIn) {
       _intakeSubsystem.setMag(-0.1);
       _intakeSubsystem.setFeed(-0.16);
-      _intakeSubsystem.setDriveIntake(0.2);
     } else {
       _intakeSubsystem.setMag(0.1);
       _intakeSubsystem.setFeed(0.16);
-      _intakeSubsystem.setDriveIntake(-0.2);
     }
   }
 
@@ -43,7 +41,6 @@ public class FeedCommand extends CommandBase {
   public void end(boolean interrupted) {
     _intakeSubsystem.setMag(0);
     _intakeSubsystem.setFeed(0);
-    _intakeSubsystem.setDriveIntake(0);
   }
 
   // Returns true when the command should end.
