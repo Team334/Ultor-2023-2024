@@ -16,7 +16,7 @@ public class IntakeCommand extends CommandBase {
 
   private final boolean _retract;
 
-  /** Creates a new IntakeCommand. FOR INTAKE + FEEDING */
+  /** Creates a new IntakeCommand. FOR INTAKE + FEEDING. */
   public IntakeCommand(IntakeSubsystem intakeSubsystem, boolean retract) {
     _intakeSubsystem = intakeSubsystem;
     _pid = new PIDController(0.1, 0, 0); // TODO: VALUES?
