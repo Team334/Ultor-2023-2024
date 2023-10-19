@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.commands.drive.DriveCommand;
 import frc.robot.commands.intake.FeedCommand;
 import frc.robot.commands.intake.IntakeCommand;
+import frc.robot.commands.shooter.ShooterCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -32,12 +33,12 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    _driveSubsystem.setDefaultCommand(new DriveCommand(
-      _driveSubsystem,
-      _robotCtrl :: driveLeftY,
-      _robotCtrl :: driveRightX,
-      true
-    ));
+    // _driveSubsystem.setDefaultCommand(new DriveCommand(
+    //   _driveSubsystem,
+    //   _robotCtrl :: driveLeftY,
+    //   _robotCtrl :: driveRightX,
+    //   true
+    // ));
   }
 
   private void configureBindings() {
@@ -51,8 +52,12 @@ public class RobotContainer {
       new FeedCommand(_intakeSubsystem, false)
     );
 
-    _robotCtrl.driveController.L2().whileTrue(
+    _robotCtrl.driveController.R1().whileTrue(
       new FeedCommand(_intakeSubsystem, true)
+    );
+
+    _robotCtrl.driveController.R2().whileTrue(
+      new ShooterCommand(_shooterSubsystem)
     );
   }
 

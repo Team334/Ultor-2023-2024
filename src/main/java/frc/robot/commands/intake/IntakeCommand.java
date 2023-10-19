@@ -46,13 +46,13 @@ public class IntakeCommand extends CommandBase {
     } else {
       setpoint = Constants.Encoder.INTAKE_EXTENDED;
 
-      _intakeSubsystem.setMag(-0.1);
-      _intakeSubsystem.setFeed(-0.16);
-      _intakeSubsystem.setDriveIntake(0.2);
+      _intakeSubsystem.setMag(0.8);
+      _intakeSubsystem.setFeed(-1);
+      _intakeSubsystem.setDriveIntake(0.6);
     }
 
     double volts = _pid.calculate(_intakeSubsystem.getActuator(), setpoint);
-    volts = MathUtil.clamp(volts, -0.5, 0.5);
+    volts = MathUtil.clamp(volts, -1, 1);
 
     _intakeSubsystem.setActuatorVoltage(volts);
   }
@@ -61,10 +61,6 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     _intakeSubsystem.setActuatorVoltage(0);
-
-    _intakeSubsystem.setMag(0);
-    _intakeSubsystem.setFeed(0);
-    _intakeSubsystem.setDriveIntake(0);
   }
 
   // Returns true when the command should end.
