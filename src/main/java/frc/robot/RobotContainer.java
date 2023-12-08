@@ -33,12 +33,12 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    // _driveSubsystem.setDefaultCommand(new DriveCommand(
-    //   _driveSubsystem,
-    //   _robotCtrl :: driveLeftY,
-    //   _robotCtrl :: driveRightX,
-    //   true
-    // ));
+    _driveSubsystem.setDefaultCommand(new DriveCommand(
+      _driveSubsystem,
+      _robotCtrl :: driveLeftY,
+      _robotCtrl :: driveRightX,
+      true
+    ));
   }
 
   private void configureBindings() {
