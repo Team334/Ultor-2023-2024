@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -27,9 +28,16 @@ public class ShooterSubsystem extends SubsystemBase {
     TalonFXConfig.configureFalcon(_left);
     TalonFXConfig.configureFalcon(_right);
 
+    _left.setNeutralMode(NeutralMode.Coast);
+    _right.setNeutralMode(NeutralMode.Coast);
+
     _right.setInverted(TalonFXInvertType.Clockwise);
-    _left.set(TalonFXControlMode.Follower, _right.getDeviceID());
-    _left.setInverted(TalonFXInvertType.OpposeMaster);
+    _left.setInverted(TalonFXInvertType.Clockwise);
+
+      // _left.setInverted(TalonFXInvertType.CounterClockwise);
+
+   // _left.set(TalonFXControlMode.Follower, _right.getDeviceID());
+    //_left.setInverted(TalonFXInvertType.OpposeMaster);
   }
 
 
